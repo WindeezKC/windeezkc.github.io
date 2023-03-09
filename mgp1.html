@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COSC 594: mgP1</title>
+    <h3>Kellan Christ and Marco Deleon</h3>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1> COSC 594: Interactive Tech in HCI</h1>
+        <h1> MGP1: Creating a game on 8x8 LED matrix</h2>
+		<nav>
+			<ul>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="index.html">About</a></li>
+				<li><a href="index.html">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+    <main>
+		<section>
+			<h2>Introduction</h2>
+			<p>
+              
+                    The purpose of this assignment was to create a game on our 8x8 LED matrix and sometype of inventive  interactive input. Starting with everything, firstly we had to figure out what pins correspond to one another 
+                    as there are 24 pins to the 8x8 matrix while only 16 need actual power to them. This is because the 8x8 matrix can be used by either having red LEDs lit or green LEDs lit up on it. 
+                    This is not a difficult process but rather a tedious one as it requires you to put power to one pin at a time and then drag a grounded cable across the other pins to determine what column or row
+                    corresponds to the pins. After completing this process we can mark down what pins go to what row and column and go from there and have a table something along the lines like this.
+                    <table class = "center">
+                        <tr>
+                          <td>Pin 1</td>
+                          <td>Pin 2</td>
+                          <td>Pin 3</td>
+                          <td>Pin 4</td>
+                          <td>Pin 5</td>
+                          <td>Pin 6</td>
+                          <td>Pin 7</td>
+                          <td>Pin 8</td>
+                          <td>Pin 9</td>
+                          <td>Pin 10</td>
+                          <td>Pin 11</td>
+                          <td>Pin 12</td>
+                          <td>Pin 13</td>
+                          <td>Pin 14</td>
+                          <td>Pin 15</td>
+                          <td>Pin 16</td>
+                          <td>Pin 17</td>
+                          <td>Pin 18</td>
+                          <td>Pin 19</td>
+                          <td>Pin 20</td>
+                          <td>Pin 21</td>
+                          <td>Pin 22</td>
+                          <td>Pin 23</td>
+                          <td>Pin 24</td>
+                         
+                          
+                        </tr>
+                        <tr>
+                          <td>R5 Red</td>
+                          <td>R5 Green</td>
+                          <td>C4</td>
+                          <td>R6 Red</td>
+                          <td>R6 Green</td>
+                          <td>C3</td>
+                          <td>R7 Red</td>
+                          <td>R7 Green</td>
+                          <td>C2</td>
+                          <td>R8 Red</td>
+                          <td>R8 Green</td>
+                          <td>C1</td>
+                          <td>C5</td>
+                          <td>R4 Green</td>
+                          <td>R4 Red</td>
+                          <td>C6</td>
+                          <td>R3 Green</td>
+                          <td>R3 Red</td>
+                          <td>C7</td>
+                          <td>R2 Green</td>
+                          <td>R2 Red</td>
+                          <td>C8</td>
+                          <td>R1 Green</td>
+                          <td>R1 Red</td>
+                        </tr>
+                      </table>
+                </p>
+                
+            
+            <p>
+
+                After figuring this out it was time to wire the matrix up to the arduino and make sure it was working. Putting some simple code on the arduino, wiring it up based on the Pin configuration and making it loop through each row and leave one blank at a time
+                      we get something that looks like this along with the supplied code shown below.
+                      
+                      <pre class="box">
+                        <code>
+                            
+                                                                                            int columns[8] = {2, 3, 4, 5, 6, 7, 8, 9}; // define column pins
+                                                                                            int rows[8] = { 10, 11, 12, 13, A0, A1, A2, A3}; // define row pins
+                                                                                            int index = 0; 
+
+                                                                                            void setup() {
+                                                                                                for (int i = 0; i < 8; i++) {
+                                                                                                    pinMode(columns[i], OUTPUT); 
+                                                                                                    pinMode(rows[i], OUTPUT); 
+                                                                                                 }
+                                                                                            }
+
+                                                                                            void loop() {
+                                                                                                digitalWrite(columns[index], HIGH); // turn on current column
+                                                                                                digitalWrite(rows[index], LOW); // turn on current row
+                                                                                                delay(100); 
+                                                                                                digitalWrite(columns[index], LOW); 
+                                                                                                digitalWrite(rows[index], HIGH);
+                                                                                                index++; // move to the next LED
+                                                                                                if (index > 7) { 
+                                                                                                     index = 0;
+                                                                                                 }
+                                                                                            }
+                        </code>
+                      </pre>
+                      
+                
+                <div>
+                <video width="500px" height="500px"
+                controls="controls"/>
+                 
+                <source src="imgs/matrix1.MP4"
+                    type="video/mp4">
+            </video>
+                </div>
+            </p>
+            <h2>Planning</h2>
+            <p>
+                With all the wiring figured out and being able to test the matrix, we decided to think about how we wanted to control out game. Knowing our 3d modeling abilities and
+                 how we wanted to control it at a basic level we chose using a potentiometer. Understanding it spins sort of like a steering wheel, that’s what we chose to model after
+                  was a steering wheel. The only issue we had to figure out with it was how to connect it to the potentiometer and allow it to actually turn the potentiometer as 
+                  well when you turn the wheel. After taking some measurements of the potentiometer we got a basic idea of the size at around 20 mm tall and 6 mm wide. Another snag
+                   we ran into is the fact that the potentiometer has a cut away on it so someone can grip it and turn it easier. This runs about 12 mm down of the length of the
+                     knob on the potentiometer. Thinking as simple as possible on this as my CAD abilities are not the best, I chose to make a cylinder to 
+                slider over the potentiometer and “grip” it by adding that cut away portion in order to turn it and then slide the wheel one that piece. his gives us a small sketch in 
+                Fusion 360 with those dimensions that looks somewhat like this. Based on how plastic from 3d printers expands slightly and nowing it needs to slide over the knob,
+                I had added a slight difference in size of .2 mm to the diameter of the inner circle to allow it to fit with ease.
+
+            
+            <div>
+            <img src="imgs/hub1.png"/>
+                </div>
+                <div>
+                    <img src="imgs/hub2.png"/>
+                        </div>
+                </p>
+
+                <p>
+           After extruding it out based on the size of the potentiometer we can see the cutout and how it should slide over the potentiometer and make it over the cut portion of the potentiometer as well.
+                    We then 3d Print it out and make sure it fit over the potentiometer.
+            <div>
+            <img id= "vertical" src = "imgs/hub3.png"/>
+                </div>
+            </p>
+
+
+            <p>
+
+                From here we now have the connecting piece to the potentiometer and now we need to connect it to the “wheel” we are going to create. 
+                Starting off based on the size of the connecting piece, we have a diameter of 11mm on the outside of the piece we created. Knowing this
+                 we made a starting circle that’s 11.2 mm in diameter in order for it to be a whole that the piece can slide into. We then take that and go
+                  out another 5 mm to add a way to extrude a piece to  that can slide over the pole attachment. From here we can then select a size of a wheel,
+                   Choosing 80 mm in diameter gives us a decent size the user can grip with his hands well enough and use his/her fingers to turn the wheel.
+                    Adding to that, I added about a 10mm difference knowing some would fall off shaping it into a cylindrical form. This sketch ends up looking  like 
+                    this with a few circles and some cutout pieces to look more like a wheel and connect the outer ring to the center piece that will attach to the pole 
+                    piece we just created. 
+
+
+
+
+                <div>
+                    <img src = "imgs/wheel1.png">
+                </div>
+            </p>
+
+
+
+
+
+            <p>
+                We can then exrude this like before and get a better look at what we have created. Going up past the piece that will slide over the pole attachment by about 10mm, we can now 
+                see what the wheel will look like once we print it out. 
+
+
+
+                <div>
+                    <img src = "imgs/wheel2.png">
+                </div>
+
+
+            </p>
+
+            <p>
+                Printing this out along with the pole we can attach the 2. As FDM 3D printers have some tolerance issues the fit was not as perfect as we would have liked. Knowing its plastic 
+                we decided to melt down the areas the slide into one another and push the plastic in, essentially plastic welding the two together. This allows us not to worry about the 2 coming apart
+                and strong enough it won't just pop off when you turn the wheel. 
+
+
+
+
+                <div>
+                    <img src ="imgs/wheel-pole1.png">
+                </div>
+            </p>
+            <p>
+                Having these 2 joined the next step was to think about how to mount the potentiometer and wheel to a table so you could turn it without having to hold the wheel in one piece and base of the potentiometer
+            together and actually have a decent user experience. Having been into racing and racing simulators as well as owning a wheel for my computer. I decided to take the same approach as the 
+            Logitech G920 wheel as well as many other similar devices that has a similar design concept to what we had made. having a base, slight peg that extends towards the user and the sterring wheel attached to that peg.
+            We had to design a small base that the potentiometer could side though, allowing the "peg" of the potentiometer to connect to the wheel and mount that "base" to the table. 
+            Also knwing the limtations of our 3D printer, modeling abilities and general strength of FDM printed parts, the simplest solution to the mounting of the base is just some strong double-sided adhesive.
+            After modeling and account for the potentiometers diameter, as well as needing to solder some wire to the 3 pins of the potentiometer to allow for a decent amount space for the LED matrix and the input device
+            we made a simple box thats open on one side with a hole of 7mm in the center of it. 
+           
+           
+            <div>
+                
+                <img src = "imgs/base1.png">
+                
+            </div>
+            </p>
+<p> Extruding this out like before and printing it out, gives us this box with an open side and  1 side with a hole in it.
+            <div>
+                    <img src="imgs/base3.png">
+            </div>
+            </p>
+            
+
+
+            <h2>Piecing it together</h2>
+            <p>Adding the base, peg and Wheel together it begins to look like the G920 in a way as described previously. With this now we have a way to control the game on the matrix  and move
+                our "player" or controlled LED back and forth on the matrix. 
+                Here we can see the G920 and how it has the base and wheel connected to that base compared to ours which has the base and is connected with a rotating peg that is used to input as movement. 
+
+
+
+
+
+
+
+                <div>
+                    <img src = "imgs/g920.png">
+                    <img src = "imgs/completewheel1.png">
+                </div>
+    </p>    
+        <p> 
+            Wiring the potentiometer was easy after looking at a pinout configuration online. Soldering the ground, power and Output pin that will be wired into the 5v, ground and A5 pins on the arduino.
+
+
+            <div>
+                <img src="imgs/pinout1.png">
+                <img src ="imgs/wiring1.png">
+
+            </div>
+            <p>
+                While the wiring is done the next trick is being able to get it to stay in place. First we tried doing what we did with the wheel and peg and plastic welding it. While this worked somewhat, the potentiometer would break
+                off and start freely moving so that was an issue. The other option was to super glue it in place which seemed to work well enough for this with a lot  of super glue. 
+                <div>
+                    <img src = "imgs/completewheel2.png">
+
+                </div>
+            </p>
+            <p>
+                Mounting the base is as simple as soume 3M mounting squaures as they are strong enough and roughly the size of the base. Taking 2 of them and sticking it to the desk allows
+                the enough stability to now turn the wheel and control the game as we inteded.  In the photos you may see some burn spots around the potentiometer, that is the result of the failed plastic welding to it.
+                We kind of expected it to fail but thought it was worth trying. The reason we thought it would fail compared to the peg and wheel was the fact we arent melting plastic on the potentiometer to weld to the base, but 
+                rather we are trying to "crimp" it into place with extra melted plastic filament from the 3D printer.
+
+                <div >
+                <img src = "imgs/completewheel3.png">
+                <img src = "imgs/wheel3.png">
+                <img src = "imgs/completewheel4.png">
+
+                </div>
+            </p>
+
+            <h2> Making the game</h2>
+            <p>Now that we have the wiring and conrtols figured out it was now time to put this together and program it.
+
+            </p>
+            <p>
+                Programming the game, we thought and looked at a few other  examples we found online such as <a href="https://www.youtube.com/watch?v=TY0jGZWgyp0">flappy bird</a>, another one as we created a wheel and though of a driving game was <a href = "https://www.winkleink.com/2011/07/arduino-8x8-led-driving-game.html">this example </a>
+                . The only issue with this game was the way it was being controlled, he made it with 2 buttons to go left and right and not actually be using a wheel. Seeing another example was a space invades style game
+                that you can see <a href = "https://maker.pro/arduino/projects/space-invaders-game-on-8x8-homemade-led-matrix">here</a>. Noticing a potentiometer for input as well as a button, we thought of going this direction
+                 and just ditching the button and essentially making it have autofiring instead. The code is also from here so thanks to Mirko Pavleski for the example. 
+
+
+            </p>
+
+            <p>
+                The  code gave us a layout to map from, he did also include a buzzer to play sounds on a hit, death or win in the game but we decided not to incorportate this for now.
+                While his desing had a housing we stayed awway from that as well due to time constraints on both our ends. Programming the matrix is like an 2d array thats 8x8, we can see this from his code examples
+                and even how he is displaying the level numbers to show a 1 such as: 
+                                    <pre>
+                                        <code>
+                                                                                                                 #define level1_ani { \
+                                                                                                                     {1, 1, 1, 0, 0, 1, 1, 1}, \
+                                                                                                                     {1, 1, 0, 0, 0, 1, 1, 1}, \
+                                                                                                                     {1, 1, 0, 0, 0, 1, 1, 1}, \
+                                                                                                                     {1, 1, 1, 0, 0, 1, 1, 1}, \
+                                                                                                                    {1, 1, 1, 0, 0, 1, 1, 1}, \
+                                                                                                                     {1, 1, 1, 0, 0, 1, 1, 1}, \
+                                                                                                                     {1, 1, 0, 0, 0, 0, 1, 1}, \
+                                                                                                                     {1, 1, 0, 0, 0, 0, 1, 1}  \
+                                                                                                                   }
+                                        </code>
+                                    </pre>
+
+            </p>
+
+
+            <p>After figuring ouyt the rows and columns needed all the code can be found here on <a href ="https://github.com/WindeezKC/594"> Github.</a>It's built off the previously mentioned 
+                code with some changes to the sound and way of firing. 
+
+            
+            </p>
+            <h2>Demo</h2>
+            <p>Here is what the game running with the crafted wheel, wired matrix and code. You can see how the potentiometer/wheel is setting the postion based on how far it is turned one way.
+                If all the way right, the player will be all the way to the right, if all the way left, the player is all the way on the left side.
+                
+                <div>
+                    <video width="500px" height="500px"
+                    controls="controls">
+                     
+                    <source src="imgs/MGP1_Demo.mp4"
+                        type="video/mp4">
+                </video>
+                </div></p>
+            <h2>Issues</h2>
+            <p>
+            After referencing the codes mentioned and creating our own. Some issues as well as things we wanted to change like making all 8 rows playable and removing the shifting of the grid ended up giving us some small issues.
+            At first the game was not initializing the first row (row 0) of the matrix, this was due to us just not initializing it in the code and having no loop to run through that set of LEDs and actually turn them on.
+            Another issue was that due to changing it form only being allowed to shoot and move within row 1-6 and not row 0 or row 7 gave us a few other issues. One of them being when we did allow movement to row 0, it would end up wrapping 
+            to the 7th row which was not good as going all the way left and having a pixel light up on the opposite side which should not happen. To fix this was just a simple if statement essentially
+            stating that if the player was on the row 0. to only light up the pxiel below the player as the player is at row 1 technically and the 3 drawn pixels are on row 0, which can be seen in the demo video, and to ligjt up the pixel 
+            below the player and 1 pixel to his right. 
+
+            <pre>
+                                                                                                         <code>
+                                                                                                                     if (potVal == -1){
+                                                                                                                         playableRow[0][potVal +1] =1;
+                                                                                                                     // playableRow[1][potVal ] =1;
+                                                                                                                     playableRow[1][potVal +1] =1;      
+                                                                                                                     playableRow[1][potVal +2] =1;   
+                                                                                                                                       
+                                                                                                                     }else {
+                                                                                                                     playableRow[0][potVal +1] =1;
+                                                                                                                     playableRow[1][potVal ] =1;
+                                                                                                                     playableRow[1][potVal +1] =1;      
+                                                                                                                     playableRow[1][potVal +2] =1;    
+                                                                                                                     }
+                                                                                                         </code>
+            </pre>
+            </p>
+<p>
+    here you can see the difference in how the LEDs will be lit up if that player is all the way to the left hand side of the matrix. It just doesn't display that pixel.
+    Soliving the issue of it not going all the way across the matrix as well as beng driven in reverse compared to what it should do, i.e. we turned the wheel left, the player moved right'
+    we had to change the mapping of the input to this <code> potVal = map(potVal, 1023, 0,-1, 6);</code>. This allowed a movement between every column on the matrix all the way across the board and with the correct 
+    directional input.
+</p>
+<h2>Unknown Bugs</h2>
+<p> After the coding and debugging was finished, the only and last issue we saw with the game was that if the bullet was being fired and you moved, the bullet tracked the postion of the player as well. This can also be seen 
+    the video. When the player fired and the bullet is moving up the matrix column, and if you moved the player from column 2 to column 4, that bullet would also go from column 2 to column 4. After multiple attempts and a few hours spent, we could not 
+    fix this issue. We are still unsure as to why, due to any messing of the bulletCol and firing functions would end up either not firing at all, firing a single bullet or not even displaying anything at all.
+
+</p>
+
+<h2>
+    Conclusion
+</h2>
+<p>
+    After all these steps of planning, wiring, testing,coding and playing the game, we are left with a successful design that works well for the user and can be controlled easily.
+    Changing the matrix columns in the code for the levels can change the layout of the game levels as well and we went on these that offer enough of a challenge as well as difficulty increase
+    as the user passes each level.In conclusion, we redesigned the classic game Space Invaders to be fun and entertaining for players while using our 3D printed wheel as input. 
+    We consider the wheel to be intuitive because players will become easily familiar corresponding the movement of the wheel to the movement of the player. 
+    In addition to adding the wheel as input, we took out the traditional button for shooting. We modified the code to allow for automated shooting and moving
+     across the eight LEDs. These modifications allow the game to be playable and enjoyable with only the wheel as input.
+</p>
+
+
+    
+		</section>
+	</main>
+    <footer>
+		<p>&copy; 2023 Kellan Christ. All rights reserved.</p>
+	</footer>
+    </body>
+    </html>
+    
