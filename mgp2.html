@@ -8,7 +8,7 @@
 <body>
 	<header>
 		<h1> COSC 594: Interactive Tech in HCI</h1>
-        <h1> Space Invaders 2   </h2>
+        <h1> Paper Piano  </h2>
 		<nav>
 			<ul>
 				<li><a href="index.html">Articles</a></li>
@@ -22,9 +22,7 @@
 			<h2>Introduction</h2>
 			<p>
               
-                    The purpose of this  project was to create some type of lowtech input with a high tech output. In essence making something that is not usually powered or interactive and 
-                    give it some type of life. A few examples are touch sensing lights, books that depending on where you press turn certain leds on, a paper version of flappy bird, a whiteboard that writes the time with servo motors, the list goes 
-                    on and on.
+                The purpose of this project was to create some type of low-tech input with a high tech output. In essence, making something that is not usually powered or interactive and give it some type of life. A few examples are touch sensing lights, books that depending on where you press turn certain LEDs on, a paper version of flappy bird, a whiteboard that writes the time with servo motors, the list goes on and on.
                    
                 </p>
                 
@@ -41,10 +39,7 @@
             </p>
             <h2>Planning</h2>
             <p>
-               To start we had to come up with some type of lowtech input. Building off a previous uProject on touch capacitive buttons, we leaned this way on how we wanted to interact with
-                whatever we were going to make. After some brainstorming we came up with a few ideas that were showed in class to build off such as a Theremin Device getting controlled by different things,
-                a memory game about which LEDs light up and you pressing them in that order. The hard part with the memory game was creating some type if analog way to store the LEDs chosen and what the user may choose. 
-                You can see the ideas we came up with in the photos below, most of them show the ideas or slight changes to certain ideas and how to control them.
+                To start we had to come up with some type of low-tech input. Building off a previous uProject on touch capacitive buttons, we leaned this way on how we wanted to interact with whatever we were going to make. After some brainstorming, we came up with a few ideas that were shown in class to build off such as a Theremin Device getting controlled by different things, a memory game about which LEDs light up and you pressing them in that order. The hard part with the memory game was creating some type of analog way to store the LEDs chosen and what the user may choose. You can see the ideas we came up with in the photos below, most of them show the ideas or slight changes to certain ideas and how to control them.
 
 
             
@@ -61,20 +56,29 @@
                 </p>
 
                 <p>
-           After coming up with some ideas and thinking about what we could do, we decided to make a lowtech piano based on touch capacitive sensors made of copper tape and paper circuits,
-           with a few wires.
+                    After coming up with some ideas and thinking about what we could do, we decided to make a low-tech piano based on touch capacitive sensors made of copper tape and paper circuits, with a few wires.
 
             <div>
                 <img class="MakeSmall" id= "vertical" src="imgs/brainstorm1.png">
                 </div>
             </p>
+            <p>Based off this we chose between a music box and a piano as we wanted something that would give audible feedback to a user inputting or mimicking pressing a key. You can see in the below sketches of our piano idea to build off the first piano sketch we had made. Adding a few wires and some mock keys down to get a better picture of it. 
 
+                <div>
+                    <img class="MakeSmall" id= "vertical" src="imgs/planning3.png">
+
+                </div>
+
+
+            </p>
 
             <p>
-                Building from the plan of a flat piano, we began to draw it out a bit. Knowing we would need a decent number of keys and a way to wire it, we planned to 3d print a base plate
-                to lay down the keys (or strips of copper tape) in order to wire them up. This idea on paper led us to a decent first picture of what our piano would look like. This was also were we could pna some of 
-                the wiring and where we wanted the pins to go to the keys on the piano, going from left to right on the keyboard will play a lower note such that the farthest left key will play a highest pitch note 
-                and the farthest right key will play the lowest note.
+                Building from the plan of a flat piano, we began to draw it out a bit. Knowing we would need a decent number of keys and a way to wire it, we planned to 3d print a base plate to lay down the keys (or strips of copper tape) in order to wire them up. This idea on paper led us to a decent first picture of what our piano would look like. This was also where we could plan some of the wiring and where we wanted the pins to go to the keys on the piano, going from left to right on the keyboard will play a lower note such that the farthest left key will play a highest pitch note and the farthest right key will play the lowest note.
+
+
+                <p>
+                    Now hearing from some classmates on the keys, they saw the 9 keys and knowing a full chord is 7 keys, making something to mimic the foot pedals in a piano, we went with using the farthest left and right key slots for that. This ends up allowing the user, hopefully, to have 7 normal keys, 7 higher pitched keys and 7 lower pitched keys with the left most key being the pitch up key and the right most key being the pitch down key.
+                </p>
                 <div>
                     <img class="MakeSmall" id= "vertical" src = "imgs/planning1.png">
 
@@ -86,42 +90,49 @@
 
               
             </p>
-            <p>You can see in this the 9 Keys we plan to use and the wiring for it. While the paper wireing looks messy, it is for us to follow and connect to the arduino and use the piezo buzzer
-                to create the sounds we want. Pins 3-11 will be the different touch buttons while pin 2 will be the common send pin, each one will be linked with a 22 KOhm resistor.  This allows us to detect
-                each key press with the most minimal amout of wires and circuits that we would have to make.
-
+            <p>You can see in this the 9 Keys we plan to use and the wiring for it. While the paper wiring looks messy, it is for us to 
+                follow and connect to the arduino and use the piezo buzzer to create the sounds we want. Pins 3-11 will be the different
+                 touch buttons while pin 2 will be the common send pin, each one will be linked with a 22 KOhm resistor. This allows us to
+                  detect each key press with the most minimal amount of wires and circuits that we would have to make.
             </p>
             <p>
-                Going further on the design we wanted to house it in some way and the best was some type of box that the piano keys ccould sit on top of and then run the wires below it into the circuit and allow us to play the sounds
-                we want based on the key presses.  This idea looks a little simplier than all those wires as shown below.
+                Going further on the design we wanted to house it in some way and the best was some type of box that the piano keys could sit
+                 on top of and then run the wires below it into the circuit and allow us to play the sounds we want based on the key presses. 
+                 This idea looks a little simpler than all those wires as shown below.
             <div>
                 <img class="MakeSmall" id= "vertical" src = "imgs/planning2.png">
 
             </div>
+            <p>
+            This is just a rough sketch of what we plan, as we want to hide as much of the wiring and circuits as
+             possible allowing for a sleeker look to the piano instead of a bunch of random wirings and hardware laying around.
+             </p>
             </p>
             <h2>Modeling</h2>
             <p>
-                To make the keys seem more like keys on a piano, we decided making a simple 3d model was the best choice for this. Creating a simple box with an edge and in between each key another slight edge
-                in order to determine the difference in keys but also help to keep the copper tape we planned on using from touching one another and running into issues there.
-                In Fusion 360 it was pretty straight forward and that wass start with a box, raise the edges and add in the dividers we would need to get. This began to takes shape as a simple sketch
-                that looks something like this.
-
+                To make the keys seem more like keys on a piano, we decided making a simple 3d model was the best choice for this. Creating a
+                 simple box with an edge and in between each key another slight edge in order to determine the difference in keys but also help to
+                  keep the copper tape we planned on using from touching one another and running into issues there. In Fusion 360 it was pretty straight
+                   forward and that was start with a box, raise the edges and add in the dividers we would need to get. This began to take shape as a simple 
+                   sketch that looks something like this.
                 <div>
                     <img src = "imgs/pianoModel1.png">
                 </div>
 
             </p>
             <p>
-                After extruding the pieces out we need and cutting away at the backside of the box in order to make the running of wires easier and lay flatter, we get this in fusion 360.
-                <div>
+                After extruding the pieces out we need and cutting away at the backside of the box
+                 in order to make the running of wires easier and lay flatter, we get this in fusion 360.            
+                     <div>
                     <img src = "imgs/pianoModel2.png">
                     
                 </div>
             </p>
             <p>
-                From here, between our model in Fusion 360 and sketch, you can see our plan of using the 3d printer to make a housing for the keys, then hide the wiring and use paper and drawn paper circuits to decide on our keys pressed
-                and play the sound we want from the arduino. To power the arduino we would use a 9v battery running into the ground portiong of the arduino and the VIN as well for power. The piezo buzzer 
-                would get wired up to the arduino off of it. 
+                From here, between our model in Fusion 360 and sketch, you can see our plan of using the 3d printer to make a housing for the keys, 
+                then hide the wiring and use paper and drawn paper circuits to decide on our keys pressed and play the sound we want from the arduino.
+                 To power the arduino we would use a 9v battery running into the ground portion of the arduino and the VIN as well for power. The piezo 
+                 buzzer would get wired up to the arduino off it.
             </p>
 
 
