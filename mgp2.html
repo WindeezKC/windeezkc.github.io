@@ -134,14 +134,54 @@
                  To power the arduino we would use a 9v battery running into the ground portion of the arduino and the VIN as well for power. The piezo 
                  buzzer would get wired up to the arduino off it.
             </p>
+<h2>Piecing it Together</h2>
+
+            <p>
+                After all the modeling had been done, prototyping and planning it was time to fully assemble all the pieces. Starting with covering the piano key plate we made in copper tape so there is something conductive to touch, to soldering the resistors and wires together and assembling it all together in  a housing, or in this case a shoe box. 
+                Soldering 1 resistor end to an extra piece of wire and then another wire with a male pin to plug into the breadboard allows us to wire the extra piece to the key on the keyboard, solder it and allow the current to run through the resistor and be read by the Arduino on  the breadboard. Having to repeat this 9 times over for each key on the piano.
+                <div>
+                    <img src = "imgs/solder1.png">
+                    <img src = "imgs/solder2.png">
+                    
+                </div>
+            </p>
+
+            <p>
+                Here you can see how the wire is now soldered to the single piano key in the picture. Each key has a few strips of copper tape and a little bit of solder there so we  can solder the rest of the wires to the keys. This now allows us to have a touch capacitive input for our piano once it is all wired together. 
+
+                <img src = "imgs/solder3.png">
+            </p>
+            <p>
+                To show the finished wiring on the piano plate we can look at the picture below and you can see that we have 7 red wires and 2 black, this was done so the 2 black can represent the pedal ‘keys’ we added. 
+
+            Moving forward we can see the wiring on the breadboard. While it looks messy it is much like our hand drawn picture. We have one common send pin which is pin 2 on the Arduino. The rest are for each key which are pins 4-10 and 3 and 11 are wired with a send pin on A3 as we will explain why. The send pin is running into the negative side of the breadboard, while the negative does not matter we chose there as it was easiest to lay wires into and gave us enough open spaces on the Arduino to plug in each key. This allows them to determine what key is being pressed. The only downside to doing it this way is we can only touch 1 key at a time. Knowing this we had to have the pedal keys wired to a different send pin as we could not change the pitch due to us only being allowed to press 1 key at a time. This now meant, swapping the 2 pedal keys with pins 3 and 11 and a send pin of A3 , we could press either pedal key and the 1 of the 7 normal piano keys. This gave us 21 different notes we could now technically play. 
+                    With all the wiring done we ended up with a finished look that we aimed for where it was all hidden in the shoe box and the only piece you could see was the piano key plate as we had planned, as well as a tiny portion of wiring as that was almost impossible to hide with how it was wired and soldered together. 
+
+                    <img src ="imgs/solder4.png">
+
+            </p>
 
 
 
+<h2>Demo</h2>
+<p>
+The finished product now becomes a working keyboard with musical notes as you'd expect from a normal piano. To see and hear it, watch this video of it in action.
+<iframe width="560" height="420"
+src="fill in with youtube link">
+</iframe>
 
+To see the simple arduino code for this, check it out on gihthub <a href="https://github.com/WindeezKC/594/tree/main/mgp2" >here</a>.
 
+</p>
 
-
-
+<h2>Issues/Troubleshooting</h2>
+<p>
+    While many of the issues were avoided with sketching and planning by visualizing the wiring along with other things, the only problem we could not solve was the issue of powering the entire piano off a battery. Using a 9v and adapter to be able to plug it into the Arduino was not enough to power the keyboard and piezo buzzer. Using the 9v battery we were able to supply power to the Arduino and knew this because the Arduino was lit up and acting as if it had power. Doing some research showed us that the Arduino nano has a voltage regulator so our best guess is the voltage was getting dropped by the Arduino and causing it not to be able to be powered. While we were hoping to do this for in all in one piano box, we unfortunately still had to use the power from the USB-c cable connected to our laptop. While the issue does not affect performance it is still a little unfortunate. We would most likely be able to find a better solution with a series a batteries such as AA’s but without the time to get these parts to wire them together, we stuck with just using the laptop as power.
+</p>
+<h2>Conclusion</h2>
+<p>
+    In the end we a re left with a simple 'paper piano' made of some wiring, breadboards, 3d printed materials and copper tape. 
+</p>
 
 
     
