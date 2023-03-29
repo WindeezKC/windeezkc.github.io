@@ -141,6 +141,7 @@
                 Here you can see how the wire is now soldered to the single piano key in the picture. Each key has a few strips of copper tape and a little bit of solder there so we  can solder the rest of the wires to the keys. This now allows us to have a touch capacitive input for our piano once it is all wired together. 
 
                 <img src = "imgs/solder3.png">
+                <img src = "imgs/solder4.png">
             </p>
             <p>
                 To show the finished wiring on the piano plate we can look at the picture below and you can see that we have 7 red wires and 2 black, this was done so the 2 black can represent the pedal ‘keys’ we added. 
@@ -148,7 +149,7 @@
             Moving forward we can see the wiring on the breadboard. While it looks messy it is much like our hand drawn picture. We have one common send pin which is pin 2 on the Arduino. The rest are for each key which are pins 4-10 and 3 and 11 are wired with a send pin on A3 as we will explain why. The send pin is running into the negative side of the breadboard, while the negative does not matter we chose there as it was easiest to lay wires into and gave us enough open spaces on the Arduino to plug in each key. This allows them to determine what key is being pressed. The only downside to doing it this way is we can only touch 1 key at a time. Knowing this we had to have the pedal keys wired to a different send pin as we could not change the pitch due to us only being allowed to press 1 key at a time. This now meant, swapping the 2 pedal keys with pins 3 and 11 and a send pin of A3 , we could press either pedal key and the 1 of the 7 normal piano keys. This gave us 21 different notes we could now technically play. 
                     With all the wiring done we ended up with a finished look that we aimed for where it was all hidden in the shoe box and the only piece you could see was the piano key plate as we had planned, as well as a tiny portion of wiring as that was almost impossible to hide with how it was wired and soldered together. 
 
-                    <img src ="imgs/solder4.png">
+                    <img src ="imgs/pianoBox2.png">
 
             </p>
 
@@ -157,9 +158,13 @@
 <h2>Demo</h2>
 <p>
 The finished product now becomes a working keyboard with musical notes as you'd expect from a normal piano. To see and hear it, watch this video of it in action.
+
+
+<div>
 <iframe width="560" height="420"
 src="fill in with youtube link">
 </iframe>
+</div>
 
 To see the simple arduino code for this, check it out on gihthub <a href="https://github.com/WindeezKC/594/tree/main/mgp2" >here</a>.
 
