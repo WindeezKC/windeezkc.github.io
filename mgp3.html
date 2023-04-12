@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>COSC 594: mgP3</title>
+    <h3>Kellan Christ and Marco Deleon</h3>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1> COSC 594: Interactive Tech in HCI</h1>
+        <h1> Wearable Mouse  </h2>
+		<nav>
+			<ul>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="index.html">About</a></li>
+				<li><a href="index.html">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+    <main>
+        <section>
+            <h2>
+                Introduction
+            </h2>
+            <p>
+                The goal of this project was to take a IMU that to control something. Thinking of ways to do this we started like the previous projects
+                and brainstormed 20 ideas for our project. From these 20 ideas, we narrowed to a few we could focus on. From the few ideas we chose, we made more detailed sketches before we attempt to make them. After sketching out our ideas, we settled on an idea to build so we would be ready for the critiquing session. After the critiquing session, we made final adjustments to our project and created the blog and demo video.
+
+            </p>
+            <h2>
+                Planning
+            </h2>
+            <p>
+                These were our 20 ideas that we came up with during our brainstorming session. All these ideas involve the IMU, and some of them use another component such as a servo motor, buttons, and LEDs. Some of these ideas also involved another device such as a drone, RC car, fan, and a laptop.
+            </p>
+            <p>
+                <div>
+                    <img id="vertical" src="imgs/mgp3-sketch1.png"/>
+                    <img id="vertical" src="imgs/mgp3-sketch2.png"/>
+                </div>
+            </p>
+            <p>
+                We couldn’t focus on 20 ideas while making the project, so we had to make some type of criteria to judge each idea on. We had to consider the amount of time we had to work on the project and the resources involved in building it. A lot of these ideas seemed unrealistic in terms of finishing on time. We also wanted some sort of working prototype by the time we reached the critiquing session. We also didn’t have the materials for some of the ideas such as the ones involving a drone or RC car. From all our ideas, we narrowed it down to two ideas. 
+            <div>
+                <img id="vertical" src="imgs/mgp3-sketch3.png"/>
+                <img id="vertical" src="imgs/mgp3-sketch4.png"/>
+            </div>
+            </p>
+
+            <p>
+                These are the two ideas we wanted to move forward with. The first idea is a camera controlled by an IMU. We were still undecided if we wanted to do a stabilizing camera or a camera, we can control with hand gestures. The second idea was to make a mouse out of the IMU. The idea was to control the cursor by tilting the IMU in different directions. We also added two buttons to act as a left click and right click. 
+                
+                <div>
+
+                <img src="imgs/mgp3-sketch5.png"/>
+            </div>
+            </p>
+            <p>
+                After making these detailed design sketches, we decided to choose the IMU mouse as our project. We found the IMU mouse to be more interesting and had a better understanding of the code behind controlling the cursor using the IMU. We also made some changes to the IMU cursor so that it was wearable on someone’s wrist.  We built a way that the IMU and Arduino would sit on someone’s wrist so whenever they tilt their wrist, the cursor would move. We had the buttons placed on the user’s index and middle finger so they can be pressed.
+                <div>
+                <img src="imgs/mgp3-sketch6.png"/>
+            </div>
+            </p>
+            
+            <h2>
+                Piecing it together
+            </h2>
+            <p>
+                While the difficult part of this was figuring out the IMUs orientation and best way to control it. Using the wrist,after some trial and error, became the best as you can move it up,down, left and right to control the IMU.
+                Before putting anything together or adding the buttons. We just started with the IMU hooked into the arduino and some simple code that was given in the <a href="https://github.com/adafruit/Adafruit_ICM20X"> Adafruit ICM20x Library</a>. This allowed us to
+                check that the IMU was working as well as see the movement of the IMU before doing any real programming for the computer mouse we wanted to build. 
+                Watching all the gyroscopic, accelerometer and magnetometer data came through and moving it around allowed us to watch the changes in the axes to determine what we should use, even though we already knew which one it should be, we went to use the gyroscopic data to control it.
+                 
+            </p>
+            <p>
+                Based on our idea and sketch of this we knew we would have to build something to wear. The easiest material we could find to be able to house the arduino, IMU and the 2 buttons was some cardboard 
+                we cut up to house the items and be able to wear them. Using 1 piece of cardboard for the IMU with some double sided tape to make it stay as well as pushing the pins on the arduino
+                through the cardboard piece in order for that to stay we could then solder all the wires to the arduino on the backside 
+                and make a more ocmpact version of this compared to using an entire breadboard and wires.
+                <div>
+                    <img id= "vertical"src = "imgs/mgp3-cardboard1.png">
+                    </div>
+            </p>
+            <p>
+                With just the IMU soldered to the arduino we tested that by just holding it to our wrist to make sure it was still reading the data properly we needed.
+           <div>
+            <img id= "vertical"src = "imgs/mgp3-cardboard2.png">
+           </div>
+            </p>
+            <p>
+                After that was done we still needed to solder the buttons to the board, each button required a 220 ohm resistor, connected to a ground wire and an analog wire running off the same connection to pins 12 and 10 on the Arduino as well as a 5v connection to the Arduino. Soldering all that looked like this in the end.
+           
+                <div>
+                    <img id= "vertical"src = "imgs/mgp3-cardboard3.png">
+                    <img id= "vertical"src = "imgs/mgp3-cardboard4.png">
+                </div>
+            </p>
+            <p>
+                With the buttons now wired we also had to connect these to the arduino along with the IMU that was wired to the Ground pin, 5v pin, A4 and A5 spots using the qwik connector. Adding these in was not the easiest as the pins are fairly close together.
+                However soldering the buttons to their correct pins along with the IMU was done and this is when the wiring began to look messy as well, but follows what was just said in terms of conenctions. After that was done the back side of the cardboard piece with the arduino pins coming through now looks like this.
+                <div>
+                    <img id= "vertical"src = "imgs/mgp3-cardboard5.png">
+                </div>
+            </p>
+            <p>The next part was figuring out how to mount this, with the limited supplies we had we stuck with using double sided adhesive that would stick to your skin on the back of the device as well as the buttons on your fingertips.
+                Testing it out it worked well but only for the first few uses and then began to lose its stickiness due to the oils on your skin or any dust in the air. In the future adding some type of Velcro straps to go all the way around your fingers and wrist would probably work better and also last longer and allow for virtually anyone to wear the device. 
+                Here you can see the adhesive pads to the 'box' like housing we made for it as well as the adhesive on the backside of the buttons. 
+            <div>
+                <img id= "vertical"src = "imgs/mgp3-cardboard6.png">
+                <img id= "vertical"src = "imgs/mgp3-cardboard7.png">
+            </div>
+            </p>
+            <p>
+                After all that we cut and formed the required cardboard to make the housing so only the buttons wires were coming out of it and looked more like something you can wear as well as control.
+                In the future we probably would have wanted to model and 3d print a housing out but due to time constraints on just figuring the controlling of the IMU out, 3d printing the housing was notviable as it would not have been done.
+            <div>
+                <img id= "vertical"src = "imgs/mgp3-cardboard8.png">
+            </div>
+            </p>
+            <p> Taking the IMUs gyroscopic values storing them and then running them into python to read and split the values we could now control the computer with a wearable mouse we had made.</p>
+        <h2>
+            Demo
+        </h2>
+        <p> With all that done and it finally finished we could now try it out. This is what we ended up with after some tweeking to the python and arduino code <a href ="https://github.com/WindeezKC/594/tree/main/mgp3-code">stored here.</a> We now have a decently functioning mouse.
+
+            <div>
+                <video width="1280 px" height="720px"
+                controls="controls">
+                 
+                <source src="imgs/mouseVid.mp4"
+                    type="video/mp4">
+            </video>
+
+
+        </p>
+        <h2>
+            Issues/Bugs
+        </h2>
+        <p>
+            While this was fairly straightforward, with the soldering of the arduino we did run into some issues.As previously mentioned with the connections being so close together, we had a short or 2 when testing in between soldering the pieces together. Avoiding this was not hard but more of a touch up with the soldering iron and adding some Kapton tape in between some of the terminals to avoid this which fixed all those issues. Another was when testing this. The IMU is extremely sensitive to any change in motion and since it measure across the X, Y and Z axis any slight movement was detected and would cause the mouse cursor to go wild all over the place. It also has a slight delay at times and appears to be buggy at times as if the IMU is confused on our direction we are trying to move to. This was mostly solved by changing/adding code to store the previous position or motion we made to add it to the X,Y and Z axis and go off of that so it knows we are holding the IMU to the left in order to move to the left. While it was not super hard fixes it shows how sensitive the device is and the extra step or 2 we needed to take to fix it. 
+        </p>
+        <h2>
+            Conclusion
+        </h2>
+        <p>During our design process, we considered a lot of different ideas. We had ideas that revolved around the IMU and various components. Throughout the design process, we had to discard ideas due to time constraints or we just didn't have the materials to complete it. From the few ideas we could, we sketched out each part the prototype would need. After this stage, we leaned towards making a wearable mouse. At first, we had to figure out how to map the tilting to the movement of the cursor. Then, we had to map the two buttons to a left and right click on a laptop. After the prototype was functional, we moved towards making it wearable. We made it so that the IMU and arduino would sit on the user's wrist, and the buttons would be on the index and middle finger. In the future, we could add additional buttons for each finger so a user could get more usage out of this mouse.
+            
+        </p>
+
+        
+            
+
+
+
+        </section>
+
+
+
+
+
+
+    </main>
