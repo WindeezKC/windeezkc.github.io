@@ -127,7 +127,7 @@
 
             <div>
                 <video width="1280 px" height="720px"
-                controls="controls">
+                controls="controls"/>
                  
                 <source src="imgs/mouseVid.mp4"
                     type="video/mp4">
@@ -139,9 +139,15 @@
         <h2>
             Issues/Bugs/Problems
         </h2>
+
+
+
         <p>
             While this was fairly straightforward, with the soldering of the arduino we did run into some issues.As previously mentioned with the connections being so close together, we had a short or 2 when testing in between soldering the pieces together. Avoiding this was not hard but more of a touch up with the soldering iron and adding some Kapton tape in between some of the terminals to avoid this which fixed all those issues. Another was when testing this. The IMU is extremely sensitive to any change in motion and since it measure across the X, Y and Z axis any slight movement was detected and would cause the mouse cursor to go wild all over the place. It also has a slight delay at times and appears to be buggy at times as if the IMU is confused on our direction we are trying to move to. This was mostly solved by changing/adding code to store the previous position or motion we made to add it to the X,Y and Z axis and go off of that so it knows we are holding the IMU to the left in order to move to the left. While it was not super hard fixes it shows how sensitive the device is and the extra step or 2 we needed to take to fix it. 
         </p>
+
+
+
         <h2>
             Conclusion
         </h2>
