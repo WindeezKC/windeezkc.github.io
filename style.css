@@ -116,3 +116,10 @@ code {
       width: 90%; /* Wider articles on smaller screens for better use of space */
   }
 }
+img {
+  width: 50%; /* Default to 50% width of its container */
+  max-width: 100%; /* Ensures the image is never larger than its original size */
+  height: auto; /* Maintains the aspect ratio */
+  display: block;
+  margin: 10px auto; /* Adds some margin and centers the image */
+}
