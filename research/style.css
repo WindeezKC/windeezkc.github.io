@@ -1,0 +1,126 @@
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #e6f0ff; /* Light blue background for a fresh look */
+  color: #333; /* Dark gray text for better readability */
+}
+
+h1, h2, h3 {
+  font-weight: normal;
+  color: #003366; /* Dark blue for headings */
+}
+
+header {
+  background-color: #336699; /* Medium blue for header */
+  color: #fff;
+  padding: 20px 40px; /* Added horizontal padding for better spacing */
+  text-align: center; /* Centered title for better visual impact */
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  text-align: center; /* Center align the navigation menu */
+}
+
+nav ul li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px; /* Padding for better touch targets */
+}
+
+main {
+  padding: 20px;
+  display: flex;
+  flex-direction: column; /* Ensures vertical stacking of sections */
+  align-items: center; /* Center-aligns content for a neater presentation */
+}
+
+article {
+  width: 80%; /* Restrict article width for better readability */
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #fff; /* White background for contrast */
+  border-radius: 10px; /* Rounded corners for a modern look */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+article h3 {
+  margin-top: 0;
+}
+
+article p {
+  text-align: justify; /* Justify text for cleaner presentation */
+}
+
+article a {
+  display: block;
+  width: fit-content;
+  margin: 10px auto 0; /* Center button and move to the bottom of article */
+  background-color: #0055cc;
+  color: #fff;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 5px; /* Rounded corners for buttons */
+}
+
+footer {
+  background-color: #336699;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  width: 100%; /* Ensures footer is full-width */
+  position: fixed; /* Footer fixed at bottom */
+  bottom: 0;
+  left: 0;
+}
+
+/* Specific styles for tables and other elements */
+table, th, td {
+  border: 2px solid #0055cc;
+  padding: 10px;
+  border-collapse: collapse; /* Collapses border for a cleaner look */
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+code {
+  background-color: #f0f8ff; /* Light blue background for code elements */
+  padding: 5px;
+  border-radius: 5px; /* Rounded corners for code blocks */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  header, nav ul li, main, article {
+      padding: 10px;
+      text-align: center;
+  }
+
+  nav ul li {
+      display: block;
+      margin-bottom: 10px;
+  }
+
+  article {
+      width: 90%; /* Wider articles on smaller screens for better use of space */
+  }
+}
+img {
+  width: 50%; /* Default to 50% width of its container */
+  max-width: 100%; /* Ensures the image is never larger than its original size */
+  height: auto; /* Maintains the aspect ratio */
+  display: block;
+  margin: 10px auto; /* Adds some margin and centers the image */
+}
+
