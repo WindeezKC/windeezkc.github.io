@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Random Shell Sort</title>
+    <h3>Kellan Christ </h3>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<header>
+		<h1> Random Shell Sort</h1>
+        <h1> Oblivious Sorting Algorithms  </h2>
+		<nav>
+			<ul>
+				<li><a href="index.html">Articles</a></li>
+				<li><a href="index.html">About</a></li>
+				<li><a href="index.html">Contact</a></li>
+			</ul>
+		</nav>
+	</header>
+<body>
+    <main>
+        <section>
+            <h2>
+                Introduction
+            </h2>
+            <p>
+                The idea behind this came from my COSC 581 Algorithms Class at UTK taught by Dr. Langston. I had done this as my final presentation. The idea with this is in the name, a random shell sort.
+                But how does it work and who came up with this Oblivious sorting Algorithm. There has not been a time in my years of college learning computer science that I have even heard of random shell sort specifically. 
+                To each their own, here we are. Below you will see how I accomplished a faster running shell sort that generated its gap sequence in a pseudo-random way. This outlines how I came across a way to acheive these times I did that 
+                gave faster runtimes across the board compared to other Shell Sort implementations. Also, All implementations were done in python and written as to minimized function calls as python is very slow with them compared to other languages
+                and to match as much factors, to make sure that the contributing factor to runtime was the gap sequences being chosen and not to do with un-optimized code. 
+
+
+            </p>
+            <h2>
+                Creator of Random Shell Sort
+            </h2>
+            <p>
+                Any of us in Computer Science across the globe have heard the sorting Algorithm Shell sort originally created by Donald Shell in 1959. Now while we have found improvements to shell sort and how it works.
+                ALl the improvements come from the same place, it really is down to how we determine our gap sequence. Knuth and Hibbard both had ways to do this that brought the runtimes of Shell sort from O(n^2) to O(n^3/2).
+                Knuth used a gap sequence of (3^k-1)/2 while Hibbard did 2^k-1 as a gap sequence, which down the line will come clear that these gap sequences have very similar runtimes, as expected based on the O(t).
+                There are many other implementations of the gap sequence that can give us better runtimes than the original Shell Sort but I had only looked at the original implementation, Knuth's and Hibbards as well as the Random Shell sort outlined in the paper
+                that will be mentioned.
+
+            </p>
+
+
+
+            <h2>Random Shell Sort</h2>
+                Based on the paper "Randomized Shellsort: A Simple Data-Oblivious Sorting Algorithm" written by Michael Goodrich is how we achieve this O (n log n) time, in fact, randomized shell sort will always run in this time.
+                Due to this we expect to see much more reliable and faster results than a standard shell sort or even Knuth's version. Now, I am not going to dive too deep into the paper, as a quick google search will bring his paper up for you.
+                This is more about how I found a reliable way to get a random gap sequence that gave us the runtimes we had expected outlined from the paper written by Mr. Goodrich. 
+
+
+                The reason for this, if you do read the paper, Java code is given to you, however, the java implementation does not include how they selected the random number for their gap sequence. Which this is where my Problems 
+                was from the beginning, as the first six or seven attempted to write a random function for the gap sequence gave results that were 500%-1000% slower than the other implementations of shell sort on inputs as small as 100 elements.
+
+            <p>
+
+                <h2>
+                    Problems
+                </h2>
+
+                <p>
+                    As just stated it took multiple attempts to find a faster gap sequence that was generated randomly in the implementation. The first three or so attempts at finding one was taking a random number from 1 to k -1 where k was a set number that the input (n) was divisble by.
+                    I.e. If we had 1000 elements, we would only take a element from 1- 100 randomly, and when k >n, I made sure that a K value was chosen as to completely finish the last gap sequence in sorting it. This clearly did not work and landed roughly a 500% increase in runtime on 1000 elements. 
+                    Clearly with this is was not the right answer which lead me to another way of choosing a random gap sequence.
+
+                    This time, I had decided to start choosing any random number from a prespecified k value and dividing that K until it was less than or equal to a  q value, with a set value of 50. Meaning anytime we chose 1000 as our K value, we would go down from 1-1000, then 1-500, 1-250. 1-125 and so on.
+                    This would then reset back to 1000 when k was less than 50. Now this gave us a slightly better run time in certain cases when messing with the K value, as the 1000 previously said was just as an example along with the q value. Changing these numbers to either larger, smaller, or anything in between, really did not give us a longer runtime
+                    unless the k value was N/2 + 1 in size, which with knowing how shell sort works with its gap sequences is obvious as to why it will not work as the entire array does not get sorted at that point, and me not toally thinking about the issue,
+                    ended up with a array that was not sorted at all and would have every K value out of order, meaning if K was preselected at 1000, the 1001 element was out of place for myself. 
+
+                    With this out of the question and trying it multiple ways, I went back to something probably even more simple, which was to literally just call the random funtion and make sure it was between 1-n-1 in size and then run our shell sort with that gap sequence.
+                    Now this solved the problem of having an unsorted array, but it led to my longest runtimes, which was close to 1000% higher than the standard shell sort implementation.
+                    This led to some thinking on how to actually solve my gap sequence issue, as the paper states how this should run O(n log n) and not give us any issues. The one true problem, I have no Idea what their random function was, how they were doing it exaclty in order to achieve these problems.
+                    The implementation given is almost identical to a Shell Sort implementation with one exception. The gap sequence selectiong from their random function that was not shown, which even stated in the paper, if you remove that call to the random function, you have a standard shell sort implementation.
+
+               
+               
+                </p>
+
+                <h2>
+                    The Solution (At least mine)
+                </h2>
+
+
+                <p>
+                    So how did I over come this, Removing a little bit of randomnes.
+
+                    Now this sounds funny to say for a Random Shell sort, But it still is, due to the fact, it randomly selects a gap sequence size. Now how does mine work? Lets find out.
+
+                    To start, I had to think deeper about how the gap sequnce works and choose appropriately sized numbers to select this. I had to make sure I was just not doing a small gap sequnce that would increase runtime, but also start from a big enough 
+                    gap sequence that skip out saller gap sequences that would probably be uneccessary. Which was a problem in the first couple attempts, as randomly just choosing a K, I had a gap sequnce of 2-4 many times.
+                    To add to this. I tried doing something I did like with what I mentioned as my 2nd problem, and that was to reduce the gap sequnce but this time dynamically. This is kind of like Ciura's shell sort. And the third and final thing,
+                     was to randomly adjust this gap sequence, allowing us to keep our randomized shell sort actually random. This now basically became a hybrid of the 3 problems, with reducing my gap sequence, but doing it in a more random way, but setting constraints 
+                     on what the gap sequence could be so that it still was efficient. 
+
+                    The dynamic part to this that allowed us to keep the random shell sort, was to not reduce that initialy K value we selected in half this time, but rather by some factor of 1.5-2.5, which choosing a random number between these, gave us the randomness and varaiblity in gap sequence
+                    I was looking for. Also adding into this, a minimum gap of 1 kept the array sorted in a worst case.
+
+                    At the end of the day. It is nothing insanely complex, We take a large gap size thats N / random(2,3), we then proceed with a normal shell sort that gives us decreasing gap sizes doing roughly the same thing as 
+                    the initial way of getting a 'gap' by taking the previously used gap and dividng that by a random number from 1.5 -2.5 while ensuring the smaller arrays get checked all the way down giving us a sorted
+                    array in O(n log n) time
+
+                    Below is my results and runtimes. from 1000 randomly generated inputs to 10 million, 
+
+
+                </p>
+
+               
+                <h2>Results</h2>
+
+                <p> Each implementation was ran 3 times and had its runtimes averaged out to achieve each number on the same machine in Python. </p>
+                <p>
+                <div>
+                    <img id="vertical" src="/research/ShellIMG/1000.png"/>
+                    <img id="vertical" src="/research//ShellIMG/50000.png"/>
+
+                </div>
+            </p>
+            <p>As you can see from these 1000 and 50K inputs we can begin to see that the random shell Sort
+                does begin to go faster then the other implementations. This backs up what we should get based on the runtimes of the different Shell Sorts.
+            </p>
+
+
+
+            <p>
+                <div>
+                    <img id="vertical" src="/research/ShellIMG/1mil.png"/>
+                    <img id="vertical" src="/research//ShellIMG/10mil.png"/>
+
+                </div>
+            </p>
+            <p>Now with 1 million to 10 million inputs, we can really begin to see a difference in the runtimes,
+                Especially on 10 million inputs, Its nearly 50% faster than Knuths or Hibbards sequence running on the same maching. While Hibbards and Knuths had roughly the same runtimes, This was expected as they
+                are both O(n^3/2). Shell sort though was ver slow with this. and can see it. The great part about the random shell sort is how well it was actually able to do 10 million elements, all while
+                maintaining an in-place structure like shell sort should. 
+            </p>
+
+
+            <h2>Conclusion</h2>
+            <p>
+                While I am not Currently going to dive into applications for this a quick one would be the SMC protocol, which with this, could allow for efficient sorting without the compromise of privacy due to the nature of randomness. 
+                With the random Shell sort however we end up with about a 35% increase in performance compared to the next fastest shell sort I had ran. Now depending on how you implement these Algorithms
+                you can end up with very different runtimes, I chose to implement the this way as I did not want logic to be a contributing factor to runtime but rather just how the gap sequence is chosen.
+                But on a large scale with millions of completely random inputs, Randomized shell sort is extremely quick compared to other Shell Sort implementations.
+
+
+
+                
+            </p>
+
+            <h2> Code</h2>
+            <p>
+                <a href = "https://github.com/WindeezKC/RandomShellSort">GitHub
+               </a>
+            </p>
+
+</body>
+
+
+
+
+
+<main>
+
+
+
+
+
+
+<section id="contact">
+    <h2>Contact</h2>
+    <p>Connect with me on <a href="https://www.linkedin.com/in/kellanchrist/">LinkedIn</a>.</p>
+</section>
+</main>
+
+	
+<footer>
+    <p>&copy; 2023 Kellan Christ. All rights reserved.</p>
+</footer>
+</body>
+</html>
